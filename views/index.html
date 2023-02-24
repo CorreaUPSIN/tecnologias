@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <%-include('partials/header.html');%>
+
+<body">
+
+    <center>
+        <main style="margin-top: 3em;">
+                <h2 style="color:dodgerblue;"><%=titulo%></h2>
+                <img src="./img/logoUpsin.png" alt="">
+                <h3 style="color:#333;"><%=nombre%></h3>
+                <h3 style="color:#333;"><%=grupo%></h3>
+        </main>
+
+        <br><br>
+        <div class="container">
+        <table class="table table-dark table-striped table-hover" style="border-radius: 1em;">
+            <tr >
+                <th>Matricula</th>
+                <th>Nombre</th>
+                <th>Sexo</th>
+                <th>Materias</th>
+            </tr>
+            <%
+            for(item of listado ){
+                %>
+            <tr>
+                <td><%=item.matricula%></td>
+                <td><%=item.nombre%></td>
+                <td><%=item.sexo%></td>
+                <td><%=item.materias%></td>
+            </tr>    
+
+            <%
+        }
+        %>
+
+        </table>
+    </div>
+
+    </center>
+    
+    
+    <%-include('partials/footer.html');%>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla De Multiplicar</title>
+
+    <style>
+        body {
+  background-color: #333;
+  color: whitesmoke;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 2rem;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+label {
+  font-size: 1.2rem;
+  margin-right: 1rem;
+}
+
+input[type="text"] {
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 5px;
+  margin-right: 1rem;
+}
+
+input[type="submit"] {
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  background-color: dodgerblue;
+  color: whitesmoke;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+h3 {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 2rem;
+}
+
+    </style>
+</head>
+<body>
+    <h1>TABLA DE MULTIPLICAR</h1>
+    <form action="/tabla" method="post">
+        <label for="Tabla">Tabla</label>
+        <input type="text" id="numero" name="numero" required="true" value="<%=numero%>">
+        <input type="submit" value="Calcular">
+    </form>
+
+    <%
+        let res = 0;
+        for(let con = 0; con <= 10; con++) {
+            res = numero * con;
+            %>
+            <h3><%=numero%> * <%=con%> = <%=res%></h3>
+            <%
+        }
+    %>
+</body>
+</html>
