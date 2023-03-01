@@ -8,200 +8,108 @@
 
     <link rel="stylesheet" href="./css/bootstrap.min.css">
 
-    <style>
-
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-
-        }
-
-        h3{
-            display: flex;
-        }
-
-        body{
-            background-color: #333;
-            color: whitesmoke;
-
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        }
-
-        form{
-            width: 75vw;
-        }
-
-
-        .centrarDiv{
-            display: grid;
-            place-items: center;
-        }
-
-        .colorBlack{
-            color: #333;
-        }
-
-        .resulados {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #353535;
-        }
-
-        hr {
-            border-top: 1px solid #333;
-            margin: 20px 0;
-        }
-
-        /* Estilos de la información */
-        .label {
-            display: inline-block;
-            width: 200px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .value {
-            display: inline-block;
-            margin-bottom: 10px;
-        }
-
-        .number {
-            font-size: 1.2em;
-            font-weight: bold;
-        }
-
-        .currency {
-            font-size: 0.8em;
-            color: #aaa;
-            margin-left: 5px;
-        }
-
-    </style>
-
 </head>
 <body>
-    
-    <nav class="navbar navbar-light" style="background-color: rgb(221, 221, 221); box-shadow: 0 10px 0 0 black 10px;">
-        <div class="container">
-          <a class="navbar-brand" href="http://localhost:3000/">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
-                <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
-              </svg>
-          </a>
-
-            <h2 style="color: #333;">Cotizacion</h2>
-
-        </div>
-      </nav>
+    <center><h2 style="color: #830000;">Cotizacion</h2></center>      
 
     <div class="container">
-        
-        <br><br>
+        <div class="container">
+            <div class="py-5 text-center">
+                <h2>Cotización de Préstamo para Automóvil</h2>
+            </div>
+    
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <form action="/cotizacion" method="post" class="needs-validation" novalidate>
+                        <div class="mb-3">
+                            <label for="valor" class="form-label">Valor del Automóvil:</label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input type="text" class="form-control" id="valor" name="valor" required>
+                            </div>
+                            <div class="invalid-feedback">
+                                Ingresa el valor del automóvil.
+                            </div>
+                        </div>
+    
+                        <div class="mb-3">
+                            <label for="pinicial" class="form-label">Porcentaje de Pago Inicial:</label>
+                            <select class="form-select" id="pinicial" name="pinicial">
+                                <option value="10">10%</option>
+                                <option value="30">30%</option>
+                                <option value="50">50%</option>
+                                <option value="70">70%</option>
+                            </select>
+                        </div>
+    
+                        <div class="mb-3">
+                            <label for="plazo" class="form-label">Plazos:</label>
+                            <select class="form-select" id="plazo" name="plazo">
+                                <option value="12">12 meses</option>
+                                <option value="24">24 meses</option>
+                                <option value="36">36 meses</option>
+                                <option value="48">48 meses</option>
+                                <option value="60">60 meses</option>
+                            </select>
+                        </div>
+    
+                        <div class="text-center">
+                            <button class="btn btn-primary me-3" type="submit">Calcular</button>
+                            <button class="btn btn-secondary" type="reset">Limpiar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    
+            <hr class="my-5">
+    
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    
+                    <div class="resultado">
+                        <h4>Información de la Cotización</h4>
 
-        <div class="centrarDiv">
-            <form action="/cotizacion" method="p">
+                        <%
+                        let pagoInicial= 0;
+                        let totalfin = 0;
+                        let pmensual = 0;
                 
+                        if(valor!=null){
+                            pagoInicial = valor * (pinicial/100);
+                            totalfin = valor - pagoInicial;
+                            pmensual= totalfin/plazo;
+                        %>
+                        <ul class="list-group list-group-flush">
+                            <% if (valor != null) { %>
+                            <li class="list-group-item bg-info text-white">
+                                <span class="fw-bold">Valor del Automóvil:</span> $<%=valor%>
+                            </li>
+                            <li class="list-group-item bg-info text-white">
+                                <span class="fw-bold">Porcentaje de Pago Inicial:</span> <%=pinicial%>%
+                            </li>
+                            <li class="list-group-item bg-info text-white">
+                                <span class="fw-bold">Plazos:</span> <%=plazo%> meses
+                            </li>
+                            <li class="list-group-item bg-info text-white">
+                                <span class="fw-bold">Pago Inicial:</span> <%=pagoInicial%> 
+                            </li>
+                            <li class="list-group-item bg-info text-white">
+                                <span class="fw-bold">Total a Financiar:</span> <%=totalfin%> 
+                            </li>
+                            <li class="list-group-item bg-info text-white">
+                                <span class="fw-bold">Pago Mensual:</span> <%=pmensual%> 
+                            </li>
+                            <% } %>
+                        </ul>
+                        
 
-                <div class="mb-3 row">
-                    <label for="valor" class="col-sm-2 col-form-label">Valor del Automoil: $</label>
-                    <div class="col-sm-10">
-                    <input style="max-width: 380px;" type="text" class="form-control" id="valor" name="valor" required="true"> 
+                        <% } %>
+
                     </div>
-                </div>
-                <br><br>
-
-
-                <label for="">Porcentaje de Pago Inicial:</label>
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="pinicial" id="pinicial">
-                    <option value="10">10%</option>
-                    <option value="30">30%</option>
-                    <option value="50">50%</option>
-                    <option value="70">70%</option>
-                </select> <br><br>
-
-                <label for="">Plazos</label>
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="plazo" id="plazo">
-                    <option value="12">12 meses</option>
-                    <option value="24">24 meses</option>
-                    <option value="36">36 meses</option>
-                    <option value="48">48 meses</option>
-                    <option value="60">60 meses</option>
-                </select> <br> <br>
-
-
-
-                <div class="btn-group">
-                    <input class="btn btn-primary" type="submit" value="Calcular">
-                    <input class="btn btn-primary" type="reset" value="Limpiar Formulario">
-                  </div>
-
-            </form>
+            </div>              
         </div>
-
-
-        <br><br>
-
-            <div class="resulados">
-
-                <h2>Informacion de la cotizacion</h2>
-                <hr>
-
-                <%
-                let pagoInicial= 0;
-                let totalfin = 0;
-                let pmensual = 0;
-        
-                if(valor!=null){
-                    pagoInicial = valor * (pinicial/100);
-                    totalfin = valor - pagoInicial;
-                    pmensual= totalfin/plazo;
-                %>
-
-
-
-                <div class="info">
-                  <div class="label colorBlack">Valor del Automóvil:</div>
-                  <div class="value colorBlack"><span class="number">$<%=valor%></span><span class="currency">MXN</span></div>
-              <br>
-                  <div class="label colorBlack">Porcentaje de Pago:</div>
-                  <div class="value colorBlack"><span class="number"><%=pinicial%></span><span class="currency">%</span></div>
-              <br>
-                  <div class="label colorBlack">Plazos:</div>
-                  <div class="value colorBlack"><span class="number"><%=plazo%></span> meses</div>
-              <br>
-                  <div class="label colorBlack">Pago Inicial:</div>
-                  <div class="value colorBlack"><span class="number">$<%=pagoInicial%></span><span class="currency">MXN</span></div>
-              <br>
-                  <div class="label colorBlack">Total a Financiar:</div>
-                  <div class="value colorBlack"><span class="number">$<%=totalfin%></span><span class="currency">MXN</span></div>
-              <br>
-                  <div class="label colorBlack">Pago Mensual:</div>
-                  <div class="value colorBlack"><span class="number">$<%=pmensual%></span><span class="currency">MXN</span></div>
-                </div>
-                <%
-                    }
-                %>
-              </div>              
-              
-              
-              
-              
-
     </div>
 
-    <br><br><br><br><br>
-    
-    
 </body>
 
 

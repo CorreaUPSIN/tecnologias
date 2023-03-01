@@ -26,21 +26,20 @@ let datos = [{
 }
 
 ]
-  
 // Ruta principal que muestra una página con los datos del array "datos"
 router.get("/", (req, res) => {
     res.render("index.html", {
-      titulo: "Pagina en Embedded JavaScript EJS",
-      nombre: "Jorge Said Correa Sanchez",
-      grupo: "8-3",
-      listado: datos
+        titulo: "Pagina en Embedded JavaScript EJS",
+        nombre: "Jorge Said Correa Sanchez",
+        grupo: "8-3",
+        listado: datos
     });
 });
 
 // Ruta que muestra una página con una tabla vacía que espera un parámetro llamado "numero" en la URL
 router.get("/tabla", (req, res) => {
     const params = {
-      numero: req.query.numero
+        numero: req.query.numero
     };
     res.render("tabla.html", params);
 });
