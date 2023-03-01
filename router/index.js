@@ -6,42 +6,33 @@ const express = require("express");
 const router = express.Router();
 
 // Declarar un array de objetos con algunos datos de ejemplo
-let datos = [
-    {
-      matricula: "2019030292",
-      nombre: "Gonzalez Quintana Bryan Uziel",
-      sexo: "M",
-      materias: ["Ingles", "Base de Datos", "Programacion web"]
-    },
-    {
-      matricula: "2019030251",
-      nombre: "Messi Leonel Andres",
-      sexo: "M",
-      materias: ["Ingles", "Base de Datos", "Programacion web"]
-    },
-    {
-      matricula: "2019020289",
-      nombre: "Dos Santos Ronaldo Cristiano",
-      sexo: "M",
-      materias: ["Ingles", "Base de Datos", "Programacion web"]
-    },
-    {
-      matricula: "2019020007",
-      nombre: "Dua Lipa",
-      sexo: "F",
-      materias: ["Ingles", "Base de Datos", "Programacion web"]
-    }
-  ];
+let datos = [{
+  matricula:"2019030399   ",
+  nombre:"ACOSTA ORTEGA JESUS HUMBERTO    ",
+  sexo:'M ',
+  materias:["Ingles", "Base de datos", "Tecnologia I  "]
+},
+{
+  matricula:" 2020030310   ",
+  nombre:" ACOSTA VARELA IRVING GUADALUPE",
+  sexo:' M ',
+  materias:[" Ingles", " Base de datos", " Tecnologia I  "]
+},
+{
+  matricula:" 202003007    ",
+  nombre:" ALMOGABAR VAZQUES YARLEN DE JESUS   ",
+  sexo:' F ',
+  materias:["Ingles", " Base de datos", " Tecnologia I  "]
+}
+
+];
   
 // Ruta principal que muestra una página con los datos del array "datos"
 router.get("/", (req, res) => {
-    res.render("index.html", {
-      titulo: "Pagina en Embedded JavaScript EJS",
-      nombre: "Bryan Uziel Gonzalez Quintana",
-      grupo: "8-3",
-      listado: datos
+  res.render('index',{titulo: "Pagina en Embedded JavaScript EJS",listado:datos ,nombre: "JORGE SAID CORREA SANCHEZ", grupo: "8-3"});
+
     });
-});
+
 
 // Ruta que muestra una página con una tabla vacía que espera un parámetro llamado "numero" en la URL
 router.get("/tabla", (req, res) => {
